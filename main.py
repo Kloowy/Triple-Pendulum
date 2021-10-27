@@ -19,27 +19,10 @@ tail2 = []
 space = pm.Space()
 space.gravity = 0, 1000
 ball_mass, ball_radius = 1, 7
-# segment_thickness = 6
 
 screen = pg.display.set_mode((size, size))
 clock = pg.time.Clock()
 draw_options = pymunk.pygame_util.DrawOptions(screen)
-
-# pm.Segment(STATIC, 6, space, 'darkolivegreen')
-# pm.Segment((0, size), (size, size), 20, space, 'darkslategray')
-
-# ====================================================== CIRCLE ======================================================
-
-# circle_mass = 1
-# circle_radius = 50
-#
-# circle_moment = pm.moment_for_circle(circle_mass, 0, circle_radius)
-# circle_body = pm.Body(circle_mass, circle_moment)
-# circle_body.position = size/2+rope_length, 50
-# circle_shape = pm.Circle(circle_body, circle_radius)
-# circle_shape.elasticity = 0.1
-# circle_shape.friction = 0.5
-# space.add(circle_body, circle_shape)
 
 class String():
     def __init__(self, body1, attachment, indefier="body"):
@@ -51,10 +34,6 @@ class String():
             self.body2.position = attachment
         joint = pm.PinJoint(self.body1, self.body2)
         space.add(joint)
-    # def draw(self):
-    #     pos1 = convert_coordinates(self.body1.position)
-    #     pos2 = convert_coordinates(self.body2.position)
-    #     pg.draw.line(screen, (255, 255, 255), pos1, pos2, 5)
 
 def pm_circle(c_mass, c_rad, x, y, el, fr):
     c_moment = pm.moment_for_circle(c_mass, 0, c_rad)
@@ -73,7 +52,6 @@ c_body2, c_rad2 = pm_circle(1, 15, size/2+rope_length*4, size/2/2, 0.1, 0.5)
 string1 = String(c_body, (size/2, size/2/2), "position")
 string1 = String(c_body, c_body1)
 string1 = String(c_body1, c_body2)
-# pm.constraints.PinJoint(c_body, c_body1, (0, 0), (0, 0))
 
 while True:
     for event in pg.event.get():
@@ -115,14 +93,6 @@ while True:
     pg.draw.circle(screen, (100, 100, 100), (int(c_body1.position[0]), int(c_body1.position[1])), c_rad)
     pg.draw.circle(screen, (100, 100, 100), (int(c_body2.position[0]), int(c_body2.position[1])), c_rad)
     pg.draw.circle(screen, (255, 255, 0), (size/2, size/2/2), 5)
-
-
-    # for i in tail1:
-    #     pg.draw.circle(screen, (50, 50, 50), tail1[i], 3)
-    # a += 1
-    # if a == 10:
-    #     space.gravity = randint(-1000, 1000), randint(-1000, 1000)
-    #     a = 0
 
     pg.display.flip()
     clock.tick(fps)
