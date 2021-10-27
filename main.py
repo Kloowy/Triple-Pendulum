@@ -1,7 +1,7 @@
 import pygame as pg
 import pymunk as pm
 import pymunk.pygame_util
-# from random import randint
+
 pymunk.pygame_util.positive_y_is_up = False
 pg.init()
 
